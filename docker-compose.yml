@@ -37,7 +37,7 @@ services:
       timeout: 10s
 
   telegraf:
-    image: telegraf:1.22
+    image: telegraf:1.25
     volumes:
       - ./config/telegraf-spdk.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
