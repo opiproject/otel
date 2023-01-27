@@ -14,7 +14,7 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
 
 1. Run `docker-compose up -d`
 2. Open `http://localhost:3000/explore` for querying InfluxDB
-3. Open `http://localhost:9091/api/v1/query?query=dpu_num_blocks` for querying Prometheus
+3. Open `http://localhost:9091/api/v1/query?query=dpu_bytes_read` for querying Prometheus
 
 ## Intro
 
@@ -121,8 +121,8 @@ $ docker run --rm --net=host -v $(pwd)/telegraf-spdk.conf:/etc/telegraf/telegraf
 2022-03-29T18:47:11Z W! Outputs are not used in testing mode!
 2022-03-29T18:47:11Z I! Tags enabled: host=localhost
 
-dpu,host=localhost,name=Malloc0,url=http://127.0.0.1:9009 assigned_rate_limits_rw_mbytes_per_sec=0,num_blocks=131072,assigned_rate_limits_w_mbytes_per_sec=0,block_size=512,assigned_rate_limits_rw_ios_per_sec=0,assigned_rate_limits_r_mbytes_per_sec=0 1649268020000000000
-dpu,host=localhost,name=Malloc1,url=http://127.0.0.1:9009 num_blocks=131072,assigned_rate_limits_w_mbytes_per_sec=0,assigned_rate_limits_rw_ios_per_sec=0,assigned_rate_limits_r_mbytes_per_sec=0,assigned_rate_limits_rw_mbytes_per_sec=0,block_size=512 1649268020000000000
+dpu,host=866da842daa4,name=Malloc0,url=http://spdk:9009 write_latency_ticks=0,num_unmap_ops=0,num_read_ops=2,num_write_ops=0,unmap_latency_ticks=0,bytes_read=36864,bytes_unmapped=0,read_latency_ticks=323535,bytes_written=0 1674846640000000000
+dpu,host=866da842daa4,name=Malloc1,url=http://spdk:9009 bytes_read=36864,read_latency_ticks=92186,bytes_unmapped=0,num_unmap_ops=0,unmap_latency_ticks=0,write_latency_ticks=0,num_read_ops=2,bytes_written=0,num_write_ops=0 1674846640000000000
 
 mem,host=52ee5c75df01 commit_limit=69312983040i,committed_as=13494636544i,huge_page_size=2097152i,used_percent=10.100053796757296,high_free=0i,inactive=13541511168i,low_free=0i,shared=3904901120i,sreclaimable=812650496i,swap_cached=0i,free=100370612224i,huge_pages_total=2048i,low_total=0i,page_tables=49500160i,used=13567504384i,huge_pages_free=1357i,mapped=901996544i,slab=2243977216i,swap_total=4294963200i,cached=20385955840i,vmalloc_chunk=0i,vmalloc_used=0i,write_back=0i,swap_free=4294963200i,high_total=0i,available_percent=86.20598148102354,available=115801366528i,sunreclaim=1431326720i,total=134331011072i,buffered=6938624i,dirty=856064i,vmalloc_total=14073748835531776i,write_back_tmp=0i,active=8859537408i 1650954170000000000
 
