@@ -58,7 +58,7 @@ services:
       - opi
 
   grafana:
-    image: grafana/grafana:8.4.6
+    image: grafana/grafana:9.3.6
     depends_on:
       - influxdb
     volumes:
