@@ -1,4 +1,8 @@
-# Telegraf
+# OTEL
+
+[![Docker](https://github.com/opiproject/otel/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/opiproject/otel/actions/workflows/docker-publish.yml)
+[![Linters](https://github.com/opiproject/otel/actions/workflows/linters.yml/badge.svg)](https://github.com/opiproject/otel/actions/workflows/linters.yml)
+[![License](https://img.shields.io/github/license/opiproject/otel?style=flat-square&color=blue&label=License)](https://github.com/opiproject/otel/blob/master/LICENSE)
 
 ## Docs
 
