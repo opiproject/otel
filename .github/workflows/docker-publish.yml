@@ -34,6 +34,7 @@ jobs:
 
       - name: Run tests
         run: |
+          set -x
           echo wait 5s for SPDK to start... && sleep 5s
           docker-compose logs
           docker-compose ps
@@ -43,7 +44,7 @@ jobs:
           echo wait 15s for prometheus to start... && sleep 15s
           curl --fail http://127.0.0.1:9091/api/v1/query?query=mem_free | grep mem_free
           curl --fail http://127.0.0.1:9091/api/v1/query?query=cpu_usage_user | grep cpu_usage_user
-          curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_num_blocks | grep dpu_num_blocks
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_bytes_read | grep dpu_bytes_read
           curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv | grep net_bytes_recv
           curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
 
