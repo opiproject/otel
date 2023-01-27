@@ -1,35 +1,79 @@
-# OTEL
+# Monitoring & Telemetry
 
 [![Docker](https://github.com/opiproject/otel/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/opiproject/otel/actions/workflows/docker-publish.yml)
 [![Linters](https://github.com/opiproject/otel/actions/workflows/linters.yml/badge.svg)](https://github.com/opiproject/otel/actions/workflows/linters.yml)
 [![License](https://img.shields.io/github/license/opiproject/otel?style=flat-square&color=blue&label=License)](https://github.com/opiproject/otel/blob/master/LICENSE)
 
-## Docs
+## I Want To Contribute
 
-* Plugins used
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/redfish>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/http>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/cpu>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/mem>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/net>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/gnmi>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/inputs/dpdk>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/outputs/file>
-  * <https://github.com/influxdata/telegraf/tree/master/plugins/outputs/influxdb_v2>
+This project welcomes contributions and suggestions.  We are happy to have the Community involved via submission of **Issues and Pull Requests** (with substantive content or even just fixes). We are hoping for the documents, test framework, etc. to become a community process with active engagement.  PRs can be reviewed by by any number of people, and a maintainer may accept.
 
-* Dockers used
-  * <https://hub.docker.com/_/telegraf>
-  * <https://hub.docker.com/_/influxdb>
-  * <https://hub.docker.com/r/grafana/grafana>
-  * <https://hub.docker.com/r/dmtf/redfish-mockup-server>
-  * <https://github.com/spdk/spdk-csi/blob/master/deploy/spdk/Dockerfile>
+See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) and [GitHub Basic Process](https://github.com/opiproject/opi/blob/main/doc-github-rules.md) for more details.
 
 ## Getting started
 
 1. Run `docker-compose up -d`
 2. Open `http://localhost:3000/explore` for querying InfluxDB
+3. Open `http://localhost:9091/api/v1/query?query=dpu_num_blocks` for querying Prometheus
 
-## SPDK RPC proxy
+## Intro
+
+- OPI adoped <https://opentelemetry.io/> for DPUs
+- OPI goal is to pick 1 standard protocol that
+  - all vendors can implement (both linux and non-linux based)
+  - DPU consumers can integrate once in their existing monitoring systems and tools
+
+- OpenTemetry suports those data sources
+  - Traces
+  - Metrics
+  - Logs
+
+## What is mandated by OPI
+
+- OpenTemetry is made up of several main components:
+  - Specification <https://github.com/open-telemetry/opentelemetry-specification>
+  - Collector <https://github.com/open-telemetry/opentelemetry-collector>
+  - SDKs (different programming languages), for example <https://github.com/open-telemetry/opentelemetry-java>)
+
+- OPI is only mandating OTEL `Specification`
+- SDK and Collector specific implementation are left to the users
+  - They can be also from OTEL or other sources.
+
+## Collector deploy options
+
+![OPI Telemetry Architecture](/OPITelemetryArchitecture.drawio.png)
+
+- OpenTemetry collector supports several deployments:
+  - Deploy as side car inside every pod
+  - Deploy another one as aggregator per Node
+  - Deploy another one as super-aggregator per Cluster
+
+- The benefits of having multiple collectors at different levels are:
+  - Increased redundancy
+  - Enrichment
+  - Filtering
+  - Separating trust domains
+  - Batching
+  - Sanitization
+
+- Recommendation (reference)
+  - micro-aggregator inside each DPU/IPU
+  - macro-aggregator between DPUs
+    - macro-aggregator can run on the host with DPU/IPU or on a separate host
+
+## System Monitoring
+
+- System monitoring (cpu,mem,nic,...)
+  - see as example <https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver>
+
+- BMC monitoring (temp, power)
+  - Redfish extention for OTEL collector can be used to collect HW/BMC related metrics like temperature, power and others...
+  - For testing using mockup : `docker run --rm dmtf/redfish-mockup-server:1.1.8`
+
+- TBD
+  - OPI wants to define which telemetries are mandatory for each vendor to implement and which are optional
+
+## Storage SPDK
 
 see <https://spdk.io/doc/jsonrpc_proxy.html>
 
@@ -45,36 +89,27 @@ Test Proxy is running correctly
 curl -k --user spdkuser:spdkpass -X POST -H "Content-Type: application/json" -d '{"id": 1, "method": "bdev_get_bdevs", "params": {"name": "Malloc0"}}' http://127.0.0.1:9009/
 ```
 
-## Run Redfish mockup server
+## Tracing
 
-Use [docker-compose](docker-compose.yml) or manually
+- Tracing inside DPU/IPU (more tight SDK integration into our service and IPDK), streaming to zipkin/jaeger
+- TODO: need more details and examples
+
+## Logging
+
+- For example <https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/syslogreceiver>
+- TODO: need more details and examples
+
+## Qery examples
 
 ```text
-docker run --rm dmtf/redfish-mockup-server:1.1.8
+curl --fail http://127.0.0.1:9091/api/v1/query?query=mem_free | grep mem_free
+curl --fail http://127.0.0.1:9091/api/v1/query?query=cpu_usage_user | grep cpu_usage_user
+curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_num_blocks | grep dpu_num_blocks
+curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv | grep net_bytes_recv
+curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
 ```
 
-## Run InfluxDB
-
-Use [docker-compose](docker-compose.yml) or manually
-
-```text
-$ docker run --rm --name influxdb -p 8086:8086 \
-      -e DOCKER_INFLUXDB_INIT_MODE=setup \
-      -e DOCKER_INFLUXDB_INIT_USERNAME=my-user \
-      -e DOCKER_INFLUXDB_INIT_PASSWORD=my-password \
-      -e DOCKER_INFLUXDB_INIT_ORG=my-org \
-      -e DOCKER_INFLUXDB_INIT_BUCKET=my-bucket \
-      -e DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=YourInfluxDBAuthToken \
-      influxdb:2.1-alpine
-```
-
-## Run Telegraf
-
-Configuration file [telegraf-spdk.conf](config/telegraf-spdk.conf)
-
-Run telegraf using [docker-compose](docker-compose.yml) or manually
-
-Example:
+## Running example
 
 ```text
 $ docker run --rm --net=host -v $(pwd)/telegraf-spdk.conf:/etc/telegraf/telegraf.conf:ro telegraf:1.22
@@ -115,28 +150,15 @@ redfish_power_voltages,address=bmc,health=OK,host=fd287855dfb3,member_id=1,name=
 ...
 ```
 
-## Run Grafana
+## questions to  (eventually remove this section)
 
-see <https://docs.influxdata.com/influxdb/v2.1/tools/grafana/>
+- Is there integration of OTEL with kvm or esx ?
+- Use case of standalone DPU, not attached to server. Still runs OTEL collector
 
-Use [docker-compose](docker-compose.yml) or manually
+## Working items
 
-```text
-docker run --rm --net=host --name=grafana -p 3000:3000 grafana/grafana
-```
-
-Loging to <http://127.0.0.1:3000/login> using default (admin/admin)
-
-Add new datasource InfluxDB with all the parameters above
-
-## Run Prometheus
-
-Use [docker-compose](docker-compose.yml) or manually
-
-```text
-curl --fail http://127.0.0.1:9091/api/v1/query?query=mem_free | grep mem_free
-curl --fail http://127.0.0.1:9091/api/v1/query?query=cpu_usage_user | grep cpu_usage_user
-curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_num_blocks | grep dpu_num_blocks
-curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv | grep net_bytes_recv
-curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
-```
+- [#7](/../../issues/7) Starting new workstream to find out set of common metrics across vendors that OPI will mandate
+  - Action items on Marvell, Nvidia, Intell to come up with the list and present on the next meeting
+- [#6](/../../issues/6) Starting new POC with OTEL SDK and hello world app
+  - Action items on Nvidia to help compiling DOCA with OTEL SDK (i.e. <https://github.com/open-telemetry/opentelemetry-cpp> ) and hello world app to show metrics/traces streaming to standard ecosystem (zipkin/grafana/elastic/...)
+- [#5](/../../issues/5) Continue working on existing telegraf example and enhance with more metrics
