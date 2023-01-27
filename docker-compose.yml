@@ -53,7 +53,7 @@ services:
       timeout: 10s
 
   bmc:
-    image: dmtf/redfish-mockup-server:1.1.8
+    image: dmtf/redfish-mockup-server:1.2.1
     networks:
       - opi
 
