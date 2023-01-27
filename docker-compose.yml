@@ -77,7 +77,7 @@ services:
       retries: 3
 
   influxdb:
-    image: influxdb:2.1-alpine
+    image: influxdb:2.6-alpine
     ports:
       - "8086:8086"
     volumes:
