@@ -4,7 +4,7 @@ version: "3.7"
 services:
 
   spdk:
-    image: ghcr.io/opiproject/opi-storage-spdk:main
+    image: ghcr.io/opiproject/opi-storage-spdk:main@sha256:4b8eb6630b2dabfbcfa67e8d41525b1e7d1acde6239278d5ebe8dfb51abbda33
     volumes:
       - /dev/hugepages:/dev/hugepages
       - /dev/shm:/dev/shm
@@ -98,7 +98,7 @@ services:
       retries: 5
 
   otel-gw-collector:
-    image: otel/opentelemetry-collector
+    image: otel/opentelemetry-collector:0.70.0
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml:z
