@@ -4,7 +4,7 @@ version: "3.7"
 services:
 
   spdk:
-    image: ghcr.io/opiproject/opi-storage-spdk:main@sha256:07688a3820466b9fc042455993c1a6d23d561a00a10d75aa6f5f72dfcfcfdc6f
+    image: docker.io/opiproject/spdk:v23.01
     volumes:
       - /dev/hugepages:/dev/hugepages
       - /dev/shm:/dev/shm
@@ -37,7 +37,7 @@ services:
       timeout: 10s
 
   telegraf:
-    image: telegraf:1.25
+    image: docker.io/library/telegraf:1.25
     volumes:
       - ./config/telegraf-spdk.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
@@ -53,12 +53,12 @@ services:
       timeout: 10s
 
   bmc:
-    image: dmtf/redfish-mockup-server:1.2.1
+    image: docker.io/dmtf/redfish-mockup-server:1.2.1
     networks:
       - opi
 
   grafana:
-    image: grafana/grafana:9.3.6
+    image: docker.io/grafana/grafana:9.3.6
     depends_on:
       - influxdb
     volumes:
@@ -77,7 +77,7 @@ services:
       retries: 3
 
   influxdb:
-    image: influxdb:2.6-alpine
+    image: docker.io/library/influxdb:2.6-alpine
     ports:
       - "8086:8086"
     volumes:
@@ -98,7 +98,7 @@ services:
       retries: 5
 
   otel-gw-collector:
-    image: otel/opentelemetry-collector:0.71.0
+    image: docker.io/otel/opentelemetry-collector:0.71.0
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml:z
@@ -115,7 +115,7 @@ services:
       test: wget --no-verbose --tries=1 --spider http://localhost:8086/ping || exit 1
 
   prometheus:
-    image: prom/prometheus:v2.42.0
+    image: docker.io/prom/prometheus:v2.42.0
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml:z
     ports:
