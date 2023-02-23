@@ -106,6 +106,7 @@ curl --fail http://127.0.0.1:9091/api/v1/query?query=mem_free | grep mem_free
 curl --fail http://127.0.0.1:9091/api/v1/query?query=cpu_usage_user | grep cpu_usage_user
 curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_num_blocks | grep dpu_num_blocks
 curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv | grep net_bytes_recv
+curl --fail http://127.0.0.1:9091/api/v1/query?query=nginx_requests | grep nginx_requests
 curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
 ```
 
@@ -127,6 +128,8 @@ dpu,host=866da842daa4,name=Malloc1,url=http://spdk:9009 bytes_read=36864,read_la
 mem,host=52ee5c75df01 commit_limit=69312983040i,committed_as=13494636544i,huge_page_size=2097152i,used_percent=10.100053796757296,high_free=0i,inactive=13541511168i,low_free=0i,shared=3904901120i,sreclaimable=812650496i,swap_cached=0i,free=100370612224i,huge_pages_total=2048i,low_total=0i,page_tables=49500160i,used=13567504384i,huge_pages_free=1357i,mapped=901996544i,slab=2243977216i,swap_total=4294963200i,cached=20385955840i,vmalloc_chunk=0i,vmalloc_used=0i,write_back=0i,swap_free=4294963200i,high_total=0i,available_percent=86.20598148102354,available=115801366528i,sunreclaim=1431326720i,total=134331011072i,buffered=6938624i,dirty=856064i,vmalloc_total=14073748835531776i,write_back_tmp=0i,active=8859537408i 1650954170000000000
 
 net,host=52ee5c75df01,interface=eth0 drop_in=0i,drop_out=0i,bytes_sent=16589i,bytes_recv=13986i,packets_sent=89i,packets_recv=110i,err_in=0i,err_out=0i 1650954170000000000
+
+nginx,host=6465dac4e3a5,port=80,server=web waiting=0i,active=1i,accepts=1i,handled=1i,requests=2i,reading=0i,writing=1i 1677179010000000000
 
 cpu,cpu=cpu0,host=52ee5c75df01 usage_user=99.6999999973923,usage_system=0.09999999999763531,usage_idle=0,usage_iowait=0,usage_softirq=0,usage_steal=0,usage_nice=0,usage_irq=0.19999999999527063,usage_guest=0,usage_guest_nice=0 1650954170000000000
 cpu,cpu=cpu1,host=52ee5c75df01 usage_user=99.70000000204891,usage_system=0,usage_irq=0.2999999999974534,usage_steal=0,usage_idle=0,usage_nice=0,usage_iowait=0,usage_softirq=0,usage_guest=0,usage_guest_nice=0 1650954170000000000
