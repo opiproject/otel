@@ -52,6 +52,16 @@ services:
       start_period: 20s
       timeout: 10s
 
+  web:
+    image: docker.io/library/nginx:1.23.3-alpine
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - opi
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost || exit 1"]
+      timeout: 10s
+
   bmc:
     image: docker.io/dmtf/redfish-mockup-server:1.2.1
     networks:
