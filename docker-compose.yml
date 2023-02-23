@@ -39,7 +39,7 @@ services:
   telegraf:
     image: docker.io/library/telegraf:1.25
     volumes:
-      - ./config/telegraf-spdk.conf:/etc/telegraf/telegraf.conf:ro
+      - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
       - spdk
       - influxdb
