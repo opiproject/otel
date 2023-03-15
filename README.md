@@ -41,6 +41,8 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
 
 ## Collector deploy options
 
+See <https://opentelemetry.io/docs/collector/deployment>
+
 ![OPI Telemetry Deploy Option](doc/dpu-otel.png)
 
 - OpenTemetry collector supports several deployments:
