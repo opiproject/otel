@@ -41,7 +41,7 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
 
 ## Collector deploy options
 
-![OPI Telemetry Architecture](/OPITelemetryArchitecture.drawio.png)
+![OPI Telemetry Deploy Option](doc/dpu-otel.png)
 
 - OpenTemetry collector supports several deployments:
   - Deploy as side car inside every pod
