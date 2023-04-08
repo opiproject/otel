@@ -89,7 +89,7 @@ services:
       retries: 3
 
   influxdb:
-    image: docker.io/library/influxdb:2.6-alpine
+    image: docker.io/library/influxdb:2.7-alpine
     ports:
       - "8086:8086"
     volumes:
