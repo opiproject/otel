@@ -65,7 +65,7 @@ services:
       timeout: 10s
 
   bmc:
-    image: docker.io/dmtf/redfish-mockup-server:1.2.2
+    image: docker.io/dmtf/redfish-mockup-server:1.2.3
     networks:
       - opi
 
