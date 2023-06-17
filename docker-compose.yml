@@ -70,7 +70,7 @@ services:
       - opi
 
   grafana:
-    image: docker.io/grafana/grafana:9.5.3
+    image: docker.io/grafana/grafana:10.0.0
     depends_on:
       - influxdb
     volumes:
