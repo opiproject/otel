@@ -14,7 +14,7 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
 
 ## Getting started
 
-1. Run `docker-compose up -d`
+1. Run `docker compose up -d`
 2. Open `http://localhost:3000/explore` for querying InfluxDB
 3. Open `http://localhost:9091/api/v1/query?query=dpu_bytes_read` for querying Prometheus
 
