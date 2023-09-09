@@ -127,7 +127,7 @@ services:
       test: wget --no-verbose --tries=1 --spider http://localhost:8086/ping || exit 1
 
   prometheus:
-    image: docker.io/prom/prometheus:v2.46.0
+    image: docker.io/prom/prometheus:v2.47.0
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml:z
     ports:
