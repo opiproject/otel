@@ -6,7 +6,7 @@ version: "3.7"
 services:
 
   spdk:
-    image: docker.io/opiproject/spdk:v23.05
+    image: docker.io/opiproject/spdk:v23.09
     volumes:
       - /dev/hugepages:/dev/hugepages
       - /dev/shm:/dev/shm
