@@ -33,9 +33,9 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
 ## What is mandated by OPI
 
 - OpenTemetry is made up of several main components:
-  - Specification <https://github.com/open-telemetry/opentelemetry-specification>
-  - Collector <https://github.com/open-telemetry/opentelemetry-collector>
-  - SDKs (different programming languages), for example <https://github.com/open-telemetry/opentelemetry-java>)
+  - [Specification](https://github.com/open-telemetry/opentelemetry-specification)
+  - [Collector](https://github.com/open-telemetry/opentelemetry-collector) and [Collector Contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib)
+  - SDKs (different programming languages), for example [Python](https://github.com/open-telemetry/opentelemetry-python), [Java](https://github.com/open-telemetry/opentelemetry-java) and [Go](https://github.com/open-telemetry/opentelemetry-go)
 
 - OPI is only mandating OTEL `Specification`
 - SDK and Collector specific implementation are left to the users
