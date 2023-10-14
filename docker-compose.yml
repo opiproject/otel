@@ -110,7 +110,7 @@ services:
       retries: 5
 
   otel-gw-collector:
-    image: docker.io/otel/opentelemetry-collector:0.86.0
+    image: docker.io/otel/opentelemetry-collector:0.87.0
     command: ["--config=/etc/otel-collector-config.yaml"]
     volumes:
       - ./config/otel-collector-config.yaml:/etc/otel-collector-config.yaml:z
