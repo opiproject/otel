@@ -39,7 +39,7 @@ services:
       timeout: 10s
 
   telegraf:
-    image: docker.io/library/telegraf:1.28
+    image: docker.io/library/telegraf:1.29
     volumes:
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
     depends_on:
