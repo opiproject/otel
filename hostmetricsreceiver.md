@@ -40,6 +40,6 @@ The available scrapers are:
 | filesystem | All                          | File System utilization metrics                        |
 | memory     | All                          | Memory utilization metrics                             |
 | network    | All                          | Network interface I/O metrics & TCP connection metrics |
-| paging     | All                          | Paging/Swap space utilization and I/O metrics
+| paging     | All                          | Paging/Swap space utilization and I/O metrics          |
 | processes  | Linux                        | Process count metrics                                  |
 | process    | Linux & Windows              | Per process CPU, Memory, and Disk I/O metrics          |
