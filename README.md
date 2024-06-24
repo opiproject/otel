@@ -119,8 +119,9 @@ curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_readin
 ## Running example
 
 - Make sure you run `rpc_http_proxy`, `spdk` and `ngnix` apps from above.
-- Consider adjusting IP address in [telegraf.conf](https://github.com/opiproject/otel/blob/1e00ed289762f36fea65e16ace64611a3282be2d/config/telegraf.conf#L8) from `http://spdk:9009` to `http://localhost:9009`.
-- Consider adjusting IP address in [telegraf.conf](https://github.com/opiproject/otel/blob/1e00ed289762f36fea65e16ace64611a3282be2d/config/telegraf.conf#L21) from `http://web:80/nginx_status` to `http://localhost:80/nginx_status`.
+- Consider adjusting SPDK IP address in [telegraf.conf](https://github.com/opiproject/otel/blob/1e00ed289762f36fea65e16ace64611a3282be2d/config/telegraf.conf#L8) from `http://spdk:9009` to `http://localhost:9009`.
+- Consider adjusting NGNIX IP address in [telegraf.conf](https://github.com/opiproject/otel/blob/1e00ed289762f36fea65e16ace64611a3282be2d/config/telegraf.conf#L21) from `http://web:80/nginx_status` to `http://localhost:80/nginx_status`.
+- Consider adjusting BMC address and credentials in [telegraf.conf](https://github.com/opiproject/otel/blob/1e00ed289762f36fea65e16ace64611a3282be2d/config/telegraf.conf#L2).
 
 ```text
 $ docker run --rm --net=host -v $(pwd)/telegraf.conf:/etc/telegraf/telegraf.conf:ro telegraf:1.22
