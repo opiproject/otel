@@ -105,7 +105,7 @@ curl -k --user spdkuser:spdkpass -X POST -H "Content-Type: application/json" -d 
 - For example <https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/syslogreceiver>
 - TODO: need more details and examples
 
-## Qery examples
+## Query examples
 
 ```text
 curl --fail http://127.0.0.1:9091/api/v1/query?query=mem_free | grep mem_free
@@ -114,6 +114,7 @@ curl --fail http://127.0.0.1:9091/api/v1/query?query=dpu_num_blocks | grep dpu_n
 curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv_total | grep net_bytes_recv_total
 curl --fail http://127.0.0.1:9091/api/v1/query?query=nginx_requests | grep nginx_requests
 curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
+curl --fail http://127.0.0.1:9091/api/v1/query?query=disk_used_percent | grep disk_used_percent
 ```
 
 ## Running example

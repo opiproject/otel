@@ -41,7 +41,11 @@ services:
   telegraf:
     image: docker.io/library/telegraf:1.29
     volumes:
+      - /:/hostfs:ro
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    environment:
+      - HOST_MOUNT_PREFIX=/hostfs
+      - HOST_PROC=/hostfs/proc
     depends_on:
       - spdk
       - influxdb
