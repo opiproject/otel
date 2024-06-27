@@ -64,6 +64,8 @@ services:
       - ./config/nginx.conf:/etc/nginx/conf.d/default.conf
     networks:
       - opi
+    ports:
+      - "80:80"
     healthcheck:
       test: ["CMD-SHELL", "wget -O /dev/null http://localhost || exit 1"]
       timeout: 10s
