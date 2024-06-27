@@ -115,6 +115,8 @@ curl --fail http://127.0.0.1:9091/api/v1/query?query=net_bytes_recv_total | grep
 curl --fail http://127.0.0.1:9091/api/v1/query?query=nginx_requests | grep nginx_requests
 curl --fail http://127.0.0.1:9091/api/v1/query?query=redfish_thermal_fans_reading_rpm | grep redfish_thermal_fans_reading_rpm
 curl --fail http://127.0.0.1:9091/api/v1/query?query=disk_used_percent | grep disk_used_percent
+curl --fail http://127.0.0.1:9091/api/v1/query?query=netstat_tcp_listen | grep netstat_tcp_listen
+curl --fail http://127.0.0.1:9091/api/v1/query?query=dns_query_result_code | grep dns_query_result_code
 ```
 
 ## Running example
