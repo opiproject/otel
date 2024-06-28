@@ -5,6 +5,15 @@ version: "3.7"
 
 services:
 
+  rsyslog:
+    image: rsyslog/syslog_appliance_alpine
+    ports:
+      - '6514:6514'
+    volumes:
+      - ./config/rsyslog.conf:/etc/rsyslog.conf
+    networks:
+      - opi
+
   spdk:
     image: docker.io/opiproject/spdk:v23.09
     volumes:
@@ -48,6 +57,7 @@ services:
       - HOST_PROC=/hostfs/proc
     depends_on:
       - spdk
+      - rsyslog
       - influxdb
     networks:
       - opi
