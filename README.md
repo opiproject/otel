@@ -74,7 +74,7 @@ See <https://opentelemetry.io/docs/collector/deployment>
 
 - BMC monitoring (temp, power)
   - Redfish extention for OTEL collector can be used to collect HW/BMC related metrics like temperature, power and others...
-  - For testing using mockup : `docker run --rm dmtf/redfish-mockup-server:1.1.8`
+  - For testing using mockup : `docker run --rm --net=host dmtf/redfish-mockup-server:1.1.8`
 
 - TBD
   - OPI wants to define which telemetries are mandatory for each vendor to implement and which are optional
