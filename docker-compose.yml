@@ -144,6 +144,16 @@ services:
       timeout: 10s
       retries: 5
 
+  syslog:
+    image: rsyslog/syslog_appliance_alpine
+    volumes:
+      - ./config/rsyslog.conf:/etc/rsyslog.d/50-telegraf.conf
+    ports:
+      - "6514:6514/tcp"
+      - "6514:6514/udp"
+    networks:
+      - opi
+
 volumes:
   influxdb-storage:
 
