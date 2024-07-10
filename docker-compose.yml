@@ -51,6 +51,8 @@ services:
       - influxdb
     networks:
       - opi
+    cap_add:
+      - SYS_ADMIN
     healthcheck:
       test: cat /proc/1/status || exit 1
       interval: 6s
