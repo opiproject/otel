@@ -8,9 +8,9 @@
 
 ## I Want To Contribute
 
-This project welcomes contributions and suggestions.  We are happy to have the Community involved via submission of **Issues and Pull Requests** (with substantive content or even just fixes). We are hoping for the documents, test framework, etc. to become a community process with active engagement.  PRs can be reviewed by by any number of people, and a maintainer may accept.
+This project welcomes contributions and suggestions.  We are happy to have the Community involved via submission of **Issues and Pull Requests** (with substantive content or even just fixes). We are hoping for the documents, test framework, etc. to become a community process with active engagement.  PRs can be reviewed by any number of people, and a maintainer may accept.
 
-See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) and [GitHub Basic Process](https://github.com/opiproject/opi/blob/main/doc-github-rules.md) for more details.
+See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) and [GitHub basic process](https://github.com/opiproject/opi/blob/main/Policies/doc-github-rules.md) for more details.
 
 ## Getting started
 
@@ -27,14 +27,14 @@ See [CONTRIBUTING](https://github.com/opiproject/opi/blob/main/CONTRIBUTING.md) 
   - all vendors can implement (both linux and non-linux based)
   - DPU consumers can integrate once in their existing monitoring systems and tools
 
-- OpenTemetry suports those data sources
+- OpenTelemetry suports those data sources
   - Traces
   - Metrics
   - Logs
 
 ## What is mandated by OPI
 
-- OpenTemetry is made up of several main components:
+- OpenTelemetry is made up of several main components:
   - [Specification](https://github.com/open-telemetry/opentelemetry-specification)
   - [Collector](https://github.com/open-telemetry/opentelemetry-collector) and [Collector Contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib)
   - SDKs (different programming languages), for example [Python](https://github.com/open-telemetry/opentelemetry-python), [Java](https://github.com/open-telemetry/opentelemetry-java) and [Go](https://github.com/open-telemetry/opentelemetry-go)
@@ -49,7 +49,7 @@ See <https://opentelemetry.io/docs/collector/deployment>
 
 ![OPI Telemetry Deploy Option](doc/dpu-otel.png)
 
-- OpenTemetry collector supports several deployments:
+- OpenTelemetry collector supports several deployments:
   - Deploy as side car inside every pod
   - Deploy another one as aggregator per Node
   - Deploy another one as super-aggregator per Cluster
