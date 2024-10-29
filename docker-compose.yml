@@ -22,7 +22,7 @@ services:
             grep "" /sys/kernel/mm/hugepages/hugepages-*/nr_hugepages && \
             /usr/local/bin/spdk_tgt -m 0x1 -s 512 --no-pci 2>&1 & \
             echo wait 5s... && sleep 5s && cd /usr/libexec/spdk/scripts && \
-            for i in `seq 1 10`; do ./rpc.py spdk_get_version && break || sleep 1; done  && \
+            for i in $(seq 1 10); do ./rpc.py spdk_get_version && break || sleep 1; done  && \
             ./rpc.py bdev_malloc_create -b Malloc0 64 512 && \
             ./rpc.py bdev_malloc_create -b Malloc1 64 512 && \
             ./rpc.py nvmf_create_transport -t TCP -u 8192 -m 4 -c 0  && \
