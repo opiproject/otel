@@ -43,6 +43,7 @@ services:
     volumes:
       - /:/hostfs:ro
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - HOST_MOUNT_PREFIX=/hostfs
       - HOST_PROC=/hostfs/proc
