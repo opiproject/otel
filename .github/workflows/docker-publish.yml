@@ -30,7 +30,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build & Start containers
-        run: docker compose up --build --force-recreate --detach
+        run: |
+          sudo chmod 666 /var/run/docker.sock 
+          docker compose up --build --force-recreate --detach
 
       - name: Run tests
         run: |
