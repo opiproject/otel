@@ -119,7 +119,7 @@ curl --fail http://127.0.0.1:9091/api/v1/query?query=netstat_tcp_listen | grep n
 curl --fail http://127.0.0.1:9091/api/v1/query?query=dns_query_result_code | grep dns_query_result_code
 curl --fail http://127.0.0.1:9091/api/v1/query?query=ethtool_duplex | grep ethtool_duplex
 curl --fail http://127.0.0.1:9091/api/v1/query?query=kernel_boot_time_total | grep kernel_boot_time_total
-curl --fail http://127.0.0.1:9091/api/v1/query?query=docker_container_mem_container_version | grep docker_container_mem_container_version
+curl --fail http://127.0.0.1:9091/api/v1/query?query=docker_container_mem_limit | grep docker_container_mem_limit
 curl --fail http://127.0.0.1:9091/api/v1/query?query=interrupts_irq | grep interrupts_irq
 ```
 
