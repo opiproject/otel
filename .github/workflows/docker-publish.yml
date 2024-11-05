@@ -30,7 +30,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build & Start containers
-        run: docker compose up --build --force-recreate --detach
+        run: |
+          sudo chmod 666 /var/run/docker.sock 
+          docker compose up --build --force-recreate --detach
 
       - name: Run tests
         run: |
@@ -53,6 +55,8 @@ jobs:
           curl --fail http://127.0.0.1:9091/api/v1/query?query=dns_query_result_code | grep dns_query_result_code
           curl --fail http://127.0.0.1:9091/api/v1/query?query=ethtool_duplex | grep ethtool_duplex
           curl --fail http://127.0.0.1:9091/api/v1/query?query=kernel_boot_time_total | grep kernel_boot_time_total
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=docker_container_mem_limit | grep docker_container_mem_limit
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=interrupts_irq | grep interrupts_irq
 
       - name: Logs
         if: always()
