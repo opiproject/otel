@@ -45,7 +45,7 @@ services:
       - ./config/testdata/gnmi-app:/app 
     ports:
       - "57400:57400"                     
-    command: sh -c "go run g.go"     
+    command: sh -c "go run main.go"     
     networks:
       - opi  
     healthcheck:
