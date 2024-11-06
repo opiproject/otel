@@ -4,7 +4,7 @@
 version: "3.7"
 
 services:
-
+  
   spdk:
     image: docker.io/opiproject/spdk:v23.09
     volumes:
@@ -38,17 +38,36 @@ services:
       start_period: 20s
       timeout: 10s
 
+  snmp-sim:
+    image: polinux/snmpd
+    container_name: snmp
+    ports:
+      - "161:161/udp"
+    environment:
+      - SNMP_VERSION=2c
+      - SNMP_COMMUNITY=public
+    restart: unless-stopped
+    networks:
+      - opi
+
   telegraf:
     image: docker.io/library/telegraf:1.29
     volumes:
       - /:/hostfs:ro
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - /usr/share/snmp/mibs:/usr/share/snmp/mibs 
+      - /usr/share/snmp/mibs/iana:/usr/share/snmp/mibs/iana
+      - /usr/share/snmp/mibs/ietf:/usr/share/snmp/mibs/ietf
+      - ./config/testdata/bonding:/host/proc/net/bonding
+      - ./config/testdata/mountstats:/host/proc/self/mountstats:ro
     environment:
       - HOST_MOUNT_PREFIX=/hostfs
       - HOST_PROC=/hostfs/proc
+      - MOUNT_PROC=/host/proc/self/mountstats
     depends_on:
       - spdk
       - influxdb
+      - snmp-sim
     networks:
       - opi
     cap_add:
