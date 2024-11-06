@@ -38,6 +38,22 @@ services:
       start_period: 20s
       timeout: 10s
 
+  go-app:
+    image: golang:1.20-alpine        
+    working_dir: /app                   
+    volumes:
+      - ./config/testdata/gnmi-app:/app 
+    ports:
+      - "57400:57400"                     
+    command: sh -c "go run main.go"     
+    networks:
+      - opi  
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:57400"]  
+      interval: 6s
+      timeout: 10s
+      retries: 5
+
   telegraf:
     image: docker.io/library/telegraf:1.29
     volumes:
@@ -49,6 +65,8 @@ services:
     depends_on:
       - spdk
       - influxdb
+      - go-app
+    command: sh -c "sleep 20 && telegraf"  
     networks:
       - opi
     cap_add:
