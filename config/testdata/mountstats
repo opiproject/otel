@@ -1,0 +1,14 @@
+device nfs-server:/export/path mounted on /mnt/nfs with fstype nfs4 statvers=1.1
+opts:   vers=4.1,proto=tcp,port=2049,sec=sys,clientaddr=192.168.1.100
+age:    1234567
+impl_id:        name='kernel' domain='localdomain' date='2024-11-01' time='00:00:00'
+bytes:  read=234567890 write=1234567 directread=0 directwrite=0 serverread=0 serverwrite=0
+events: inoderevalidates=12345 dentryrevalidates=23456 datainvalidates=3456 attrinvalidates=4567 vfsopen=789 vfslookup=1234
+       vfsupdatepage=3456 vfsreadpage=4567 vfsreadpages=5678 vfswritepage=6789 vfswritepages=7890 vfsgetdents=890
+       vfssetattr=234 vfsflush=1235 vfsfsync=5672 vfslock=345 vfsrelease=0 congestion_wait=0 setattrtrunc=0 setattrnontrunc=123
+       open_reclaim=0 short_rpcs=0 delay=0
+per-op statistics
+   NULL:       0 calls      0 retrans    0 bytes sent    0 bytes recv    0 queue time  0.000 ms
+   READ:     100 calls      0 retrans  5000 bytes sent 10000 bytes recv 10 queue time  1.234 ms
+   WRITE:     50 calls      0 retrans  2500 bytes sent 5000 bytes recv   5 queue time  2.345 ms
+   COMMIT:    10 calls      1 retrans  1000 bytes sent 2000 bytes recv   2 queue time  3.456 ms

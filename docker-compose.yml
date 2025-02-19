@@ -43,9 +43,12 @@ services:
     volumes:
       - /:/hostfs:ro
       - ./config/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./config/testdata/bonding:/host/proc/net/bonding
+      - ./config/testdata/mountstats:/host/proc/self/mountstats:ro
     environment:
       - HOST_MOUNT_PREFIX=/hostfs
       - HOST_PROC=/hostfs/proc
+      - MOUNT_PROC=/host/proc/self/mountstats
     depends_on:
       - spdk
       - influxdb

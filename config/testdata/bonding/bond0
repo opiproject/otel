@@ -1,0 +1,8 @@
+=Ethernet Channel Bonding Driver: v6.1.112+
+
+Bonding Mode: load balancing (round-robin)
+MII Status: down
+MII Polling Interval (ms): 0
+Up Delay (ms): 0
+Down Delay (ms): 0
+Peer Notification Delay (ms): 0
