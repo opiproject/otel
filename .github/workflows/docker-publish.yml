@@ -53,6 +53,16 @@ jobs:
           curl --fail http://127.0.0.1:9091/api/v1/query?query=dns_query_result_code | grep dns_query_result_code
           curl --fail http://127.0.0.1:9091/api/v1/query?query=ethtool_duplex | grep ethtool_duplex
           curl --fail http://127.0.0.1:9091/api/v1/query?query=kernel_boot_time_total | grep kernel_boot_time_total
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_cpu_time_seconds_total | grep system_cpu_time_seconds_total
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_disk_io_time_seconds_total | grep system_disk_io_time_seconds_total
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_filesystem_inodes_usage | grep system_filesystem_inodes_usage
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_memory_usage_bytes | grep system_memory_usage_bytes
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_network_connections | grep system_network_connections
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_paging_faults_total | grep system_paging_faults_total
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=system_processes_count | grep system_processes_count
+          echo "Wait 3 minutes for go app to start..." && sleep 3m
+          curl --fail http://127.0.0.1:9091/api/v1/query?query=spdk_bdev_bytes_read_total | grep spdk_bdev_bytes_read_total
+          curl "http://127.0.0.1:16686/api/traces?service=spdk-client&limit=1"
 
       - name: Logs
         if: always()

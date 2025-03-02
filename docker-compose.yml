@@ -146,6 +146,40 @@ services:
       timeout: 10s
       retries: 5
 
+  go-app:
+    image: golang:1.23-alpine
+    working_dir: /app
+    volumes:
+      - ./config/demo-trace:/app
+    ports:
+      - "57400:57400"
+    command: sh -c "go run main.go"
+    depends_on:
+      - otel-gw-collector
+      - spdk
+    networks:
+      - opi
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:57400/health
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
+    restart: always
+    ports:
+      - "16686:16686"
+      - "14268"
+      - "14250"
+    networks:
+      - opi
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://localhost:16686 || exit 1
+      interval: 6s
+      timeout: 10s
+      retries: 5
+
 volumes:
   influxdb-storage:
 

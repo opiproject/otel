@@ -30,6 +30,18 @@ hostmetrics:
     ...
 ```
 
+## Query examples
+
+```text
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_cpu_time_seconds_total | grep system_cpu_time_seconds_total
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_disk_io_time_seconds_total | grep system_disk_io_time_seconds_total
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_filesystem_inodes_usage | grep system_filesystem_inodes_usage
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_memory_usage_bytes | grep system_memory_usage_bytes
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_network_connections | grep system_network_connections
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_paging_faults_total | grep system_paging_faults_total
+curl --fail http://127.0.0.1:9091/api/v1/query?query=system_processes_count | grep system_processes_count
+```
+
 The available scrapers are:
 
 | Scraper    | Supported OSs                | Description                                            |

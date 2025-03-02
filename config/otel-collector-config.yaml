@@ -3,13 +3,30 @@ receivers:
   otlp:
     protocols:
       grpc:
+    
+  hostmetrics:
+    collection_interval: 1m
+    scrapers:
+      cpu:
+      load:
+      memory:
+      disk:
+      filesystem:
+      network:
+      paging:
+      processes:
 
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
     const_labels:
       label1: value1
-
+  
+  otlp:
+    endpoint: jaeger-all-in-one:4317
+    tls:
+      insecure: true
+  
   logging:
 
 processors:
@@ -28,8 +45,8 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging]
+      exporters: [logging,otlp]
     metrics:
-      receivers: [otlp]
+      receivers: [otlp,hostmetrics]
       processors: [batch]
       exporters: [logging, prometheus]
