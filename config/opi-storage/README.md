@@ -4,6 +4,8 @@ This reference conversion component accepts existing OPI storage `Stats*`
 responses and their optional sampling context. It produces standard OTLP
 `ResourceMetrics`; it is not another polling agent, transport, or exporter.
 Feed the result into the existing OTLP SDK/export path and Collector pipeline.
+The metric names are a proposed reference profile, not a claim that OPI already
+mandates them for every vendor. Coordinate that taxonomy in opiproject/otel#7.
 
 ## Semantics
 
