@@ -95,6 +95,14 @@ Test Proxy is running correctly
 curl -k --user spdkuser:spdkpass -X POST -H "Content-Type: application/json" -d '{"id": 1, "method": "bdev_get_bdevs", "params": {"name": "Malloc0"}}' http://127.0.0.1:9009/
 ```
 
+## OPI resource-aware storage metrics
+
+The [storage snapshot conversion component](config/opi-storage/README.md)
+maps OPI statistics and sampling metadata to standard OTLP cumulative sums,
+throughput/IOPS, and interval mean latency. It includes reset, clock, and
+counter-correctness tests and plugs into an existing export pipeline; it does
+not duplicate the raw SPDK scrape/host-metrics demos.
+
 ## Tracing
 
 - Tracing inside DPU/IPU (more tight SDK integration into our service and IPDK), streaming to zipkin/jaeger
